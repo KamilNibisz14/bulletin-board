@@ -1,1 +1,1 @@
-print('aaaa')
+from flask import Flask

@@ -1,0 +1,4 @@
+enum EnumLoginForm{
+  username,
+  password
+}
