@@ -76,8 +76,33 @@ class RegisterForm extends StatelessWidget {
                             )
                           ),
                           RegisterButton(
-                            isEnable: true, 
-                            onTap: () => context.read<RegisterBloc>().add(Register())
+                            isEnable: false, 
+                            onTap: () {}
+                          ),
+                        ],
+                      );
+                    }
+                    else if(state is BackendError){
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Expanded(
+                            child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 10),
+                                child: Text(
+                                  state.respone,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: Colors.red
+                                  ),
+                                ),
+                              ),
+                            )
+                          ),
+                          RegisterButton(
+                            isEnable: false, 
+                            onTap: () {}
                           ),
                         ],
                       );

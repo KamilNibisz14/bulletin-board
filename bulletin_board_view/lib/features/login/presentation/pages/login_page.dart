@@ -4,9 +4,11 @@ import 'package:bulletin_board_view/features/login/presentation/widgets/login_fo
 import 'package:bulletin_board_view/core/widgets/get_access_title_widget.dart';
 import 'package:bulletin_board_view/features/register/presentation/pages/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widgets/get_access_top_bar.dart';
 import '../../../main_bulletin_board/presentation/pages/main_bulletin_board_page.dart';
+import '../../../register/presentation/bloc/register_bloc.dart';
 
 
 class LoginPage extends StatelessWidget {
@@ -41,7 +43,10 @@ class LoginPage extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20.0, bottom: 20),
             child: GetAccessTopBar(
               title: "Login",
-              onTap: () =>Navigator.pushNamed(context, RegisterPage.id),
+              onTap: () {
+                context.read<RegisterBloc>().add(ClearDataEvent());
+                Navigator.pushNamed(context, RegisterPage.id);
+              },
               changeFormOfAccess: "register",
             )
           ),

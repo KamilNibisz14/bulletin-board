@@ -1,6 +1,6 @@
 part of 'register_bloc.dart';
 
-abstract class RegisterState extends Equatable {
+abstract class RegisterState{
   const RegisterState();
   
   @override
@@ -11,6 +11,13 @@ class RegisterInitial extends RegisterState {}
 class EnableRegister extends RegisterState {}
 class UnenableRegister extends RegisterState {}
 class PasswordError extends RegisterState{}
-class PhoneError extends RegisterState{}
-class UsernameError extends RegisterState{}
+class BackendError extends RegisterState{
+  String respone;
+  BackendError({
+    required this.respone
+  });
+  @override
+  List<Object> get props => [respone];
+}
+class RegisterSuccesfull extends RegisterState{}
 

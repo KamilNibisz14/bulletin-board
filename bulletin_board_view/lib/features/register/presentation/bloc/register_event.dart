@@ -55,5 +55,6 @@ class GetCityEvent extends RegisterEvent{
   @override
   List<Object> get props => [city];
 }
+class ClearDataEvent extends RegisterEvent{}
 
 class Register extends RegisterEvent{}

@@ -1,5 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:bulletin_board_view/features/register/domain/entities/personal_data.dart';
 import 'package:equatable/equatable.dart';
+
+import '../../../../locator.dart';
+import '../../domain/usecases/register_user.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -22,6 +26,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<GetPhoneEvent>(_onGetPhoneEvent);
     on<GetCountryEvent>(_onGetCountryEvent);
     on<GetCityEvent>(_onGetCityEvent);
+    on<ClearDataEvent>(_onClearDataEvent);
     on<Register>(_onRegister);
   }
    _onGetUsernameEvent(GetUsernameEvent event, Emitter<RegisterState> emit){
@@ -90,7 +95,24 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(UnenableRegister());
     }
   }
-  _onRegister(Register event, Emitter<RegisterState> emit){
+  _onRegister(Register event, Emitter<RegisterState> emit)async{
+    PersonalData personalData = PersonalData(city: city, country: country, password: password, phone: phone, repeatPassword: repeatPassword, username: username);
+    await locator.get<RegisterUser>().registerUser(personalData).then((value) {
+      if(value != 'OK'){
+        emit(BackendError(respone: value));
+      }else{
+        emit(RegisterSuccesfull());
+      }
+    });
+  }
+  _onClearDataEvent(ClearDataEvent event, Emitter<RegisterState> emit){
+    username = '';
+    password = '';
+    repeatPassword = '';
+    phone = '';
+    country = '';
+    city = '';
+    emit(UnenableRegister());
   }
 
   bool checkIfPasswordIsEqual(){
