@@ -1,8 +1,10 @@
 import 'package:bulletin_board_view/core/constants.dart';
+import 'package:bulletin_board_view/features/login/presentation/bloc/login_bloc.dart';
 import 'package:bulletin_board_view/features/main_bulletin_board/presentation/bloc/main_bulletin_board_bloc.dart';
 import 'package:bulletin_board_view/features/main_bulletin_board/presentation/pages/main_bulletin_board_page.dart';
 import 'package:bulletin_board_view/features/register/presentation/widgets/register_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widgets/get_access_top_bar.dart';
 import '../../../login/presentation/pages/login_page.dart';
@@ -40,7 +42,10 @@ class RegisterPage extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20.0, bottom: 20),
             child: GetAccessTopBar(
               title: "Register",
-              onTap: () =>Navigator.pushNamed(context, LoginPage.id),
+              onTap: () {
+                context.read<LoginBloc>().add(ClearDataEvent());
+                Navigator.pushNamed(context, LoginPage.id);
+              },
               changeFormOfAccess: "login",
             )
           ),

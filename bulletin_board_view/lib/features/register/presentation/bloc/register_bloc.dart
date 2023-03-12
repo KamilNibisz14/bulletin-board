@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:bulletin_board_view/features/register/domain/entities/personal_data.dart';
+import 'package:bulletin_board_view/features/register/domain/entities/register_personal_data.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../locator.dart';
@@ -96,7 +96,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
   }
   _onRegister(Register event, Emitter<RegisterState> emit)async{
-    PersonalData personalData = PersonalData(city: city, country: country, password: password, phone: phone, repeatPassword: repeatPassword, username: username);
+    RegisterPersonalData personalData = RegisterPersonalData(city: city, country: country, password: password, phone: phone, repeatPassword: repeatPassword, username: username);
     await locator.get<RegisterUser>().registerUser(personalData).then((value) {
       if(value != 'OK'){
         emit(BackendError(respone: value));

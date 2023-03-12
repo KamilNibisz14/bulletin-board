@@ -1,8 +1,8 @@
 import sqlite3
 
 
-def check_username(username):
-    conn = sqlite3.connect('../bulletin_board.db')
+def checkIfUsernameExist(username):
+    conn = sqlite3.connect('./bulletin_board.db')
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM users WHERE username=?", (username,))

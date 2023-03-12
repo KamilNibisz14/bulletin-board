@@ -1,11 +1,11 @@
-class PersonalData{
+class RegisterPersonalData{
   String username;
   String password;
   String repeatPassword;
   String phone;
   String country;
   String city;
-  PersonalData({
+  RegisterPersonalData({
     required this.city,
     required this.country,
     required this.password,

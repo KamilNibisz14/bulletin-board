@@ -3,19 +3,21 @@ import sqlite3
 from md5 import hashPassword
 
 
-def registerUser(data):
+def checkIfUserInDatabaseValid(data):
     username = data['username']
     password = data['password']
-    phone = data['phone']
-    country = data['country']
-    city = data['city']
     password = hashPassword(password).hexdigest()
+
     conn = sqlite3.connect('./bulletin_board.db')
     c = conn.cursor()
 
-    c.execute("INSERT INTO users (username, password, phone, country, city) VALUES (?, ?, ?, ?, ?)",
-              (username, password, phone, country, city))
-
+    User = c.execute("SELECT * FROM users WHERE username=?", (username,)).fetchone()
+    if User[1] == username and password == User[2]:
+        return str(User[0])
+    else:
+        return -1
     conn.commit()
     conn.close()
+
+
 

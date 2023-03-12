@@ -1,4 +1,4 @@
-import 'package:bulletin_board_view/features/login/domain/usecases/enum_login_form.dart';
+import 'package:bulletin_board_view/features/login/domain/entities/enum_login_form.dart';
 import 'package:bulletin_board_view/features/login/presentation/bloc/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';

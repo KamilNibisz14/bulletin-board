@@ -1,15 +1,16 @@
 from flask import Flask, request
 
-from registerUser.chechIfuserExist import check_username
+from loginUser.checkIfUserInDatabaseValid import checkIfUserInDatabaseValid
+from registerUser.checkIfUsernameExist import checkIfUsernameExist
 from registerUser.registerUser import registerUser
 
 app = Flask(__name__)
 
 
-@app.route('/registerUser', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def register():
     data = request.json
-    if check_username(data['username']):
+    if checkIfUsernameExist(data['username']):
         return "Username exist"
     else:
         registerUser(data)
@@ -19,11 +20,10 @@ def register():
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
-    if check_username(data['username']):
-        return "Username exist"
+    if checkIfUsernameExist(data['username']):
+        return checkIfUserInDatabaseValid(data)
     else:
-        registerUser(data)
-    return 'OK'
+        return 'Username not exist'
 
 
 if __name__ == '__main__':

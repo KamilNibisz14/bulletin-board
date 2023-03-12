@@ -22,4 +22,5 @@ class GetPasswordEvent extends LoginEvent{
   @override
   List<Object> get props => [password];
 }
+class ClearDataEvent extends LoginEvent{}
 class Login extends LoginEvent{}

@@ -1,3 +1,5 @@
+import 'package:bulletin_board_view/features/login/domain/usecases/login_user.dart';
+import 'package:bulletin_board_view/features/login/repository/login_user_database.dart';
 import 'package:get_it/get_it.dart';
 
 import 'features/person_data/domain/usecases/check_If_user_exist_in_local_database.dart';
@@ -12,4 +14,6 @@ void setup(){
   locator.registerLazySingleton<CheckIfUserExistInLocalDatabase>(() => CheckIfUserExistInLocalDatabase());
   locator.registerLazySingleton<RegisterUser>(() => RegisterUser());
   locator.registerLazySingleton<RegisterPersonDataInDatabase>(() => RegisterPersonDataInDatabase());
+  locator.registerLazySingleton<LoginUser>(() => LoginUser());
+  locator.registerLazySingleton<LoginUserDatabase>(() => LoginUserDatabase());
 }
